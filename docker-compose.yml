@@ -1,0 +1,7 @@
+services:
+  api:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      NASA_EARTHDATA_TOKEN: ${NASA_EARTHDATA_TOKEN:-}
