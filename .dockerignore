@@ -1,0 +1,16 @@
+# Allow-list: images only need these (and data/deploy, the packed data for the API image).
+*
+!api/
+!pipeline/
+!config/
+!docs/
+!web/
+!data/deploy/
+api/tests/
+pipeline/tests/
+**/__pycache__/
+web/node_modules/
+web/dist/
+web/test-results/
+web/playwright-report/
+data/deploy/*.tar.gz

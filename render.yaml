@@ -1,0 +1,19 @@
+# Render blueprint for the API (SPEC §12). Render builds api/Dockerfile from the git repo, where data/ is not
+# committed: set DATA_URL to a packed data archive (`python -m pipeline.lsh.pack --tar ...`, uploaded e.g. as a
+# GitHub release asset). Render passes environment variables to the Docker build as build args.
+services:
+  - type: web
+    name: last-safe-home-api
+    runtime: docker
+    dockerfilePath: ./api/Dockerfile
+    dockerContext: .
+    plan: free
+    region: singapore
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: DATA_URL
+        sync: false # e.g. https://github.com/<owner>/<repo>/releases/download/data-v1/lsh-data.tar.gz
+      - key: SITES
+        value: manpura,koyra,demo
+      - key: CORS_ORIGINS
+        sync: false # the web app's origin, e.g. https://last-safe-home.vercel.app

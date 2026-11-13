@@ -1,0 +1,57 @@
+# secrets
+.env
+.env.*
+!.env.example
+
+# data (never committed)
+data/
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# node / web
+node_modules/
+web/dist/
+web/dist-static/
+web/test-results/
+web/playwright-report/
+*.tsbuildinfo
+
+# editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+
+Claude Outputs
+presentation
+
+
+CLAUDE.md
+CLAUDE.local.md
+SPEC.md
+.claude/
+Claude outputs/
+Claude Outputs/
+AGENTS.md
+GEMINI.md
+.cursor/
+.cursorrules
+.cursorignore
+.windsurf/
+.windsurfrules
+.aider*
+.copilot/
+.github/copilot-instructions.md
+.continue/
+.codeium/
+.mcp.json
+docs/DECISIONS.md
+docs/campaign

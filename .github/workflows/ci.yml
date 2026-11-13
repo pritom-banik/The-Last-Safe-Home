@@ -1,0 +1,109 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}   # login shell so the conda env is active
+    steps:
+      - uses: actions/checkout@v4
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          environment-file: environment.yml
+          activate-environment: lsh
+          miniforge-version: latest
+      - name: ruff
+        run: ruff check pipeline api
+      - name: generate demo site
+        run: python -m pipeline.cli all --site demo
+      - name: pytest
+        run: python -m pytest
+
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+
+  e2e:
+    # SPEC §11: Playwright on push to main, against the demo site (API + built web app started by playwright.config.ts)
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [python, web]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          environment-file: environment.yml
+          activate-environment: lsh
+          miniforge-version: latest
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: generate demo site
+        run: python -m pipeline.cli all --site demo
+      - name: install web deps + browser
+        working-directory: web
+        run: npm ci && npx playwright install --with-deps chromium
+      - name: playwright
+        working-directory: web
+        env:
+          CI: "1"
+          PYTHON: python
+        run: npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-results
+          path: web/test-results
+
+  docker:
+    # SPEC §12: both images build; the API image (demo data baked in via pipeline.lsh.pack) answers /health
+    needs: [python, web]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          environment-file: environment.yml
+          activate-environment: lsh
+          miniforge-version: latest
+      - name: demo data, packed for the image
+        run: |
+          python -m pipeline.cli all --site demo
+          python -m pipeline.lsh.pack --sites demo
+      - name: build api image
+        run: DOCKER_BUILDKIT=1 docker build -f api/Dockerfile -t lsh-api .
+      - name: api container answers
+        run: |
+          docker run -d --name api -p 8000:8000 -e SITES=demo -e PORT=8000 lsh-api
+          for i in $(seq 1 60); do curl -fs localhost:8000/api/v1/health && break; sleep 2; done
+          curl -fs localhost:8000/api/v1/health | grep -q '"demo"'
+          curl -fs -o /dev/null "localhost:8000/api/v1/sites/demo/point?lon=90.663&lat=22.65"
+          docker image ls lsh-api
+      - name: build web image
+        run: DOCKER_BUILDKIT=1 docker build -f web/Dockerfile -t lsh-web .

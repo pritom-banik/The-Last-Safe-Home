@@ -1,0 +1,28 @@
+# Local run of the whole app (SPEC §12 `make up`): http://localhost:8080
+# The API reads ./data/processed (read-only mount); run `make demo` (or the real pipeline) first.
+services:
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    environment:
+      DATA_DIR: /app/data
+      SITES: ${SITES:-manpura,koyra,demo}
+      CORS_ORIGINS: http://localhost:8080
+    volumes:
+      - ./data/processed:/app/data/processed:ro
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+      args:
+        VITE_API_URL: /api/v1
+    depends_on:
+      - api
+    ports:
+      - "8080:80"
+    restart: unless-stopped
