@@ -35,11 +35,20 @@
   <a href="https://www.youtube.com/watch?v=I6KFL4Epd8w"><img alt="Watch the 30-second summary on YouTube" src="https://img.shields.io/badge/%E2%96%B6%2030-second%20summary-FF0000?style=for-the-badge&logo=youtube&logoColor=white"></a>
 </p>
 
+<!-- full workflow video-->
+<p align="center">
+  <a href="https://youtu.be/03Q_j-XzBB4"><img alt="Informal end-to-end walkthrough of the full workflow on YouTube" src="https://img.shields.io/badge/%F0%9F%8E%A5%20Full%20workflow-informal%20walkthrough-555555?style=flat-square&labelColor=24292F&logo=youtube&logoColor=white"></a>
+  <br>
+  <sub><i>Behind the scenes: an unedited, end-to-end recording of the whole pipeline and app</i></sub>
+</p>
+
+
+
 <!-- TODO: add the live demo URL in the table below. -->
 
 | | |
 |---|---|
-| **Videos** | [Full film (4 min)](https://www.youtube.com/watch?v=bHoLkvEUmAI) · [30-second summary](https://www.youtube.com/watch?v=I6KFL4Epd8w) |
+| **Videos** | [Full film (4 min)](https://www.youtube.com/watch?v=bHoLkvEUmAI) · [30-second summary](https://www.youtube.com/watch?v=I6KFL4Epd8w) · [Full workflow walkthrough (informal)](https://youtu.be/03Q_j-XzBB4) |
 | **Event** | NASA International Space Apps Challenge 2026 · Khulna local event |
 | **Challenge** | *Dancing with the SARs* |
 | **Data** | NISAR (NASA–ISRO) L-band radar · Landsat · Sentinel-2 · OpenStreetMap · WorldPop · geoBoundaries |
