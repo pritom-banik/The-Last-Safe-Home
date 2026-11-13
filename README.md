@@ -319,14 +319,7 @@ Details and numbers: `/method` in the app and `docs/DECISIONS.md`.
 
 Team **Nova Logits**, NASA Space Apps Challenge 2026, Khulna local event.
 
-<table>
-  <tr>
-    <td align="center" width="25%"><img src="docs/campaign/video-v3/public/team/pritom.jpg" width="150" alt="Pritom Banik"><br><b>Pritom Banik</b><br>Team Leader<br><sub>Project Management</sub></td>
-    <td align="center" width="25%"><img src="docs/campaign/video-v3/public/team/arka.jpg" width="150" alt="Arka Braja Prasad Nath"><br><b>Arka Braja Prasad Nath</b><br>Lead Developer<br><sub>Technical Architect</sub></td>
-    <td align="center" width="25%"><img src="docs/campaign/video-v3/public/team/megha.jpg" width="150" alt="Megha Tania"><br><b>Megha Tania</b><br>UI/UX Designer<br><sub>Presenter</sub></td>
-    <td align="center" width="25%"><img src="docs/campaign/video-v3/public/team/enam.jpg" width="150" alt="Md Enam E Elahi"><br><b>Md Enam E Elahi</b><br>Researcher<br><sub>Data Analyst</sub></td>
-  </tr>
-</table>
+
 
 <p align="center">
   <img src="docs/media/team-slide.jpg" alt="Team Nova Logits" width="80%">
