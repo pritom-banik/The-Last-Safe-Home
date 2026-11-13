@@ -4,7 +4,7 @@
 #   docker build -f api/Dockerfile -t last-safe-home-api .
 # or let the build download a packed data archive (hosts that build from git, where data/ is not committed):
 #   docker build -f api/Dockerfile --build-arg DATA_URL=https://.../lsh-data.tar.gz -t last-safe-home-api .
-FROM python:3.12-slim
+FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1 \
     DATA_DIR=/app/data SITES=manpura,koyra,demo PORT=8000

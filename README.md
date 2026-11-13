@@ -18,9 +18,10 @@
 </p>
 
 <p align="center">
+  <a href="#the-challenge">Challenge</a> ·
   <a href="#the-problem">Problem</a> ·
-  <a href="#what-it-does">What it does</a> ·
-  <a href="#the-film-in-six-frames">Film</a> ·
+  <a href="#what-it-does">Solution</a> ·
+  <a href="#the-film-in-eight-frames">Film</a> ·
   <a href="#how-it-works">How it works</a> ·
   <a href="#data">Data</a> ·
   <a href="#quick-start">Quick start</a> ·
@@ -28,9 +29,33 @@
   <a href="#team">Team</a>
 </p>
 
-<!-- Add the YouTube links for the full film and the 30-second summary here, e.g. under the hero image. -->
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=bHoLkvEUmAI"><img alt="Watch the full film (4 min) on YouTube" src="https://img.shields.io/badge/%E2%96%B6%20Watch%20the%20film-4%20min-FF0000?style=for-the-badge&logo=youtube&logoColor=white"></a>
+  &nbsp;
+  <a href="https://www.youtube.com/watch?v=I6KFL4Epd8w"><img alt="Watch the 30-second summary on YouTube" src="https://img.shields.io/badge/%E2%96%B6%2030-second%20summary-FF0000?style=for-the-badge&logo=youtube&logoColor=white"></a>
+</p>
+
+<!-- TODO: add the live demo URL in the table below. -->
+
+| | |
+|---|---|
+| **Videos** | [Full film (4 min)](https://www.youtube.com/watch?v=bHoLkvEUmAI) · [30-second summary](https://www.youtube.com/watch?v=I6KFL4Epd8w) |
+| **Event** | NASA International Space Apps Challenge 2026 · Khulna local event |
+| **Challenge** | *Dancing with the SARs* |
+| **Data** | NISAR (NASA–ISRO) L-band radar · Landsat · Sentinel-2 · OpenStreetMap · WorldPop · geoBoundaries |
+| **Sites** | Manpura Island (Bhola) · Koyra (Khulna) · synthetic demo |
+| **Try it** | `make demo && make api && make web` · see [Quick start](#quick-start) |
 
 ---
+
+## The challenge
+
+<p align="center">
+  <img src="docs/media/challenge.jpg" alt="NASA Space Apps Challenge 2026: Dancing with the SARs" width="80%">
+</p>
+
+*Dancing with the SARs* asks teams to use synthetic aperture radar to see Earth's surface through cloud, day and
+night. We used the new NISAR mission to answer one human question: **how long until the river reaches my home?**
 
 ## The problem
 
@@ -83,21 +108,28 @@ into three plain answers for any point on the map:
 
 All 16 screenshots, each with who uses it in real life: **[docs/FEATURES.md](docs/FEATURES.md)**.
 
-## The film in six frames
+## The film in eight frames
 
-The team's submission film and its 30-second summary tell the story from the char to the product.
+The team's submission film ([4 min](https://www.youtube.com/watch?v=bHoLkvEUmAI)) and its
+[30-second summary](https://www.youtube.com/watch?v=I6KFL4Epd8w) tell the story from the char to the product.
 Frames from the film:
 
 <table>
   <tr>
-    <td width="33%"><img src="docs/media/story-1-hook-char.jpg" alt="A home on a char with an expiry date"><br><sub><b>1 · The hook</b> · an address with an expiry date</sub></td>
-    <td width="33%"><img src="docs/media/story-2-land-lost.jpg" alt="Monpura lost 34 km² in 37 years"><br><sub><b>2 · The loss</b> · 148 → 114 km² in 37 years</sub></td>
-    <td width="33%"><img src="docs/media/story-4-clouds.jpg" alt="Optical satellites blind under monsoon cloud"><br><sub><b>3 · The gap</b> · optical satellites are blind under cloud</sub></td>
+    <td width="50%"><img src="docs/media/story-1-hook-char.jpg" alt="A home on a char with an expiry date" width="100%"><br><sub><b>1 · The hook</b> · an address with an expiry date</sub></td>
+    <td width="50%"><img src="docs/media/story-2-land-lost.jpg" alt="Monpura lost 34 km² in 37 years" width="100%"><br><sub><b>2 · The loss</b> · 148 → 114 km² in 37 years</sub></td>
   </tr>
   <tr>
-    <td><img src="docs/media/solution-1-nisar-to-answers.jpg" alt="NISAR radar to three answers"><br><sub><b>4 · The solution</b> · NISAR radar → three answers</sub></td>
-    <td><img src="docs/media/impact-1-prepare-not-react.jpg" alt="Reacting after the loss versus preparing before"><br><sub><b>5 · The change</b> · from reacting to preparing</sub></td>
-    <td><img src="docs/media/impact-3-beyond-bangladesh.jpg" alt="Every river delta at risk"><br><sub><b>6 · Beyond Bangladesh</b> · every river delta at risk</sub></td>
+    <td><img src="docs/media/story-3-families.jpg" alt="Families, farmland and livelihoods at the river's edge" width="100%"><br><sub><b>3 · The people</b> · homes, farmland, livelihoods</sub></td>
+    <td><img src="docs/media/story-4-clouds.jpg" alt="Optical satellites blind under monsoon cloud" width="100%"><br><sub><b>4 · The gap</b> · optical satellites are blind under cloud</sub></td>
+  </tr>
+  <tr>
+    <td><img src="docs/media/solution-1-nisar-to-answers.jpg" alt="NISAR radar to three answers" width="100%"><br><sub><b>5 · The solution</b> · NISAR radar → three answers</sub></td>
+    <td><img src="docs/media/impact-1-prepare-not-react.jpg" alt="Reacting after the loss versus preparing before" width="100%"><br><sub><b>6 · The change</b> · from reacting to preparing</sub></td>
+  </tr>
+  <tr>
+    <td><img src="docs/media/impact-2-early-warning.jpg" alt="Early warning notification on a phone" width="100%"><br><sub><b>7 · Next step</b> · early warning on every phone</sub></td>
+    <td><img src="docs/media/impact-3-beyond-bangladesh.jpg" alt="Every river delta at risk" width="100%"><br><sub><b>8 · Beyond Bangladesh</b> · every river delta at risk</sub></td>
   </tr>
 </table>
 
@@ -247,7 +279,7 @@ Pages: `/` home page · `/map` the map · `/method` how it works + live validati
    whole AOI (`aoi_cover` = 1 in the inventory).
 4. Add the id to `SITES` in `.env` (and in the API's environment when deployed). The site appears in the site
    selector once its `layers.json` exists.
-5. Look at the sanity checks in `docs/DECISIONS.md` (phase 6): rates within ±200 m/yr, ≥ 80 % of transects with a
+5. Check the sanity limits: rates within ±200 m/yr, ≥ 80 % of transects with a
    rate, score not all one class, water mask vs Sentinel-2 (`validation.json`).
 
 </details>
@@ -289,13 +321,13 @@ down or asleep.
 
 `config/sites/` site files · `pipeline/` offline Python processing (`python -m pipeline.cli <step> --site <id>`)
 · `api/` FastAPI backend (+ `Dockerfile`) · `web/` React + MapLibre app (+ `Dockerfile`, nginx config) ·
-`docs/METHOD.md` (+ `METHOD.bn.md`) the method in plain words, shown on `/method` · `docs/DECISIONS.md` every
-deviation from [SPEC.md](SPEC.md) · `docker-compose.yml`, `render.yaml`, `vercel.json` deployment.
+`docs/METHOD.md` (+ `METHOD.bn.md`) the method in plain words, shown on `/method` ·
+`docker-compose.yml`, `render.yaml`, `vercel.json` deployment.
 
 ```
 config/sites/   site files                 pipeline/   offline Python processing
 api/            FastAPI backend            web/        React + MapLibre app
-docs/           method, decisions, media   docs/campaign/   film and submission materials
+docs/           method, features, media    docs/media/ story frames, screenshots, team photos
 ```
 
 ## Limitations
@@ -313,17 +345,18 @@ docs/           method, decisions, media   docs/campaign/   film and submission 
 - The water maps are not yet checked against hand-labelled points (`validation.json` says so; see step 5 of “Real data for a site”).
 - Bangla text still needs a native speaker's review.
 
-Details and numbers: `/method` in the app and `docs/DECISIONS.md`.
+Details and numbers: `/method` in the app and [docs/METHOD.md](docs/METHOD.md).
 
 ## Team
 
-Team **Nova Logits**, NASA Space Apps Challenge 2026, Khulna local event.
-
-
-
-<p align="center">
-  <img src="docs/media/team-slide.jpg" alt="Team Nova Logits" width="80%">
-</p>
+<table>
+  <tr>
+    <td align="center" width="25%"><img src="docs/media/team/pritom.jpg" width="150" height="188" alt="Pritom Banik"><br><b>Pritom Banik</b><br>Team Leader<br><sub>Project Management</sub></td>
+    <td align="center" width="25%"><img src="docs/media/team/arka.jpg" width="150" height="188" alt="Arka Braja Prasad Nath"><br><b>Arka Braja Prasad Nath</b><br>Lead Developer<br><sub>Technical Architect</sub></td>
+    <td align="center" width="25%"><img src="docs/media/team/megha.jpg" width="150" height="188" alt="Megha Tania"><br><b>Megha Tania</b><br>UI/UX Designer<br><sub>Presenter</sub></td>
+    <td align="center" width="25%"><img src="docs/media/team/enam.jpg" width="150" height="188" alt="Md Enam E Elahi"><br><b>Md Enam E Elahi</b><br>Researcher<br><sub>Data Analyst</sub></td>
+  </tr>
+</table>
 
 ## Project documents
 
@@ -331,8 +364,6 @@ Team **Nova Logits**, NASA Space Apps Challenge 2026, Khulna local event.
 |---|---|
 | [docs/FEATURES.md](docs/FEATURES.md) | All 16 screenshots, with real-life uses |
 | [docs/METHOD.md](docs/METHOD.md) · [বাংলা](docs/METHOD.bn.md) | How every number is calculated |
-| [docs/DECISIONS.md](docs/DECISIONS.md) | Every deviation from [SPEC.md](SPEC.md), and why |
-| [docs/campaign/](docs/campaign/README.md) | The submission film, 30-second summary, thumbnail and how they are built |
 
 ## Data credits
 
