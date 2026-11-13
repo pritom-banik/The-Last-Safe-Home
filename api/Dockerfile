@@ -12,7 +12,8 @@ WORKDIR /app
 
 COPY api/requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt && apt-get update \
-    && apt-get install -y --no-install-recommends curl ca-certificates && rm -rf /var/lib/apt/lists/*
+    && apt-get install -y --no-install-recommends curl ca-certificates libexpat1 && rm -rf /var/lib/apt/lists/*
+# libexpat1: the rasterio wheel's bundled GDAL links against the system libexpat, which python:3.12-slim lacks
 
 COPY config/ config/
 COPY pipeline/__init__.py pipeline/__init__.py
