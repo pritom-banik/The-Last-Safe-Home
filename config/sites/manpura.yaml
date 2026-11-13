@@ -1,0 +1,33 @@
+id: manpura
+name: { en: "Manpura Island, Bhola", bn: "মনপুরা দ্বীপ, ভোলা" }
+aoi_wkt: "POLYGON((90.85 22.12, 91.10 22.12, 91.10 22.42, 90.85 22.42, 90.85 22.12))"  # approximate, editable
+utm_epsg: 32646                 # UTM 46N
+center: [90.97, 22.28]
+zoom: 11
+nisar:
+  start: "2026-06-17"           # first provisional (calibrated) acquisitions
+  end: null                     # null = today
+  production_configuration: "PR"
+  track: 69                     # chosen by the user 2026-11-07 (10 HH+HV passes; ascending)
+  known_gaps: [["2026-07-27", "2026-08-10"]]
+landsat:
+  years: [1988, 1993, 1998, 2003, 2008, 2013, 2018, 2023, 2026]
+  months: [1, 2, 3]             # dry season composites
+  max_cloud: 40
+analysis:
+  grid_res_m: 30                # analysis/score grid
+  transect_spacing_m: 100
+  transect_length_m: 6000
+  baseline_inset_m: 1500
+  coherence_min: 0.4
+  min_water_blob_px: 10
+  speckle_filter_px: 5
+score:
+  weights: { erosion: 0.6, flood: 0.3, motion: 0.1 }
+  t_full_risk_yr: 5
+  t_no_risk_yr: 50
+  motion_full_mm: 30
+reference_area_wkt: null        # stable area for InSAR referencing; null = median of coherent pixels
+validation:
+  published_area_km2: { 1973: 148, 2010: 114 }   # Ali et al., Manpura land loss study
+  island_unions: ["Manpura", "Hajirhat", "Uttar Sakuchia", "Dakshin Sakuchia"]  # Manpura upazila (geoBoundaries)

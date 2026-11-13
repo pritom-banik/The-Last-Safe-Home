@@ -1,0 +1,13 @@
+# API runtime only (the Docker image); the pipeline needs the full requirements.txt / environment.yml.
+# Pinned to the versions the test suite ran with (2026-11-08).
+fastapi==0.162.0
+uvicorn[standard]==0.54.0
+pydantic==2.14.3
+rio-tiler==9.4.13
+rasterio==1.5.2
+numpy==2.5.4
+scipy==1.18.1
+shapely==2.2.0
+pyproj==3.8.0
+PyYAML==6.0.3
+asf_search==14.1.0

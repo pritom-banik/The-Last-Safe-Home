@@ -1,0 +1,19 @@
+[project]
+name = "last-safe-home"
+version = "0.1.0"
+description = "River-bank erosion and flood risk in Bangladesh from NISAR radar"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["pipeline/tests", "api/tests"]
+pythonpath = ["."]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+extend-exclude = ["web", "data"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
