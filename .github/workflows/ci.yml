@@ -105,5 +105,11 @@ jobs:
           curl -fs localhost:8000/api/v1/health | grep -q '"demo"'
           curl -fs -o /dev/null "localhost:8000/api/v1/sites/demo/point?lon=90.663&lat=22.65"
           docker image ls lsh-api
+      - name: api container logs (on failure)
+        if: failure()
+        run: |
+          docker ps -a
+          docker inspect --format '{{.State.Status}} exit={{.State.ExitCode}} health={{if .State.Health}}{{.State.Health.Status}}{{end}}' api || true
+          docker logs api || true
       - name: build web image
         run: DOCKER_BUILDKIT=1 docker build -f web/Dockerfile -t lsh-web .
