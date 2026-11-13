@@ -1,164 +1,181 @@
-# The Last Safe Home
-
-A web map that tracks **river-bank erosion and flooding in coastal Bangladesh** with radar from the
-NASA–ISRO **NISAR** satellite and 38 years of Landsat images, and turns them into a **Home Risk Score (0–100)**
-and an estimated range of **years until the river arrives** for any point you click. English and Bangla.
-
-Built for NASA Space Apps Challenge 2026, challenge "Dancing with the SARs", by team **Nova Logits**
-(Khulna local event): Pritom Banik, Arka Braja Prasad Nath, Megha Tania and Enam E Elahi. Open source (MIT).
-
-> Every number is an estimate from satellite data, not an engineering survey. Use it to start a conversation
-> with local authorities.
-
-**What you can do:** click a point (score, years range, distance to the bank, retreat rate, flood frequency) ·
-draw an area (land lost, buildings and people by risk class, NISAR scenes over it) · move through the 2026 NISAR
-passes · swipe between 1988 and today · print a one-page report · read how it works on `/method`.
-
-Sites: **Manpura Island, Bhola** and **Koyra, Khulna** (real data) and a synthetic **demo** site that works with no
-downloads (shown with a red "DEMO DATA" banner).
-
----
-
-## Screenshots: what each feature does and who uses it
-
-All screenshots show **real data** for Manpura Island and Koyra (NISAR 2026 + Landsat 1988–2026), except where
-marked as the demo site. They are made by `web/e2e/screenshots.manual.spec.ts` (see the file for how to refresh
-them) and live in [`docs/screenshots/`](docs/screenshots/).
-
-### 1. Site overview: Home Risk Score, water and bank lines
-
-![Overview of Manpura with the Home Risk Score, water and bank lines](docs/screenshots/01-overview.png)
-
-The map colours every piece of land by its **Home Risk Score** (green low → dark red severe), shows the water of
-the selected NISAR pass in blue, and draws the river bank of every Landsat year since 1988 (purple → yellow) and
-today's NISAR bank (white). The side panel sums up the site: land lost and gained since 1988, mean and fastest
-bank retreat, buildings within 500 m of the bank, NISAR passes used.
-**Real-life use:** a union parishad member or an NGO field officer sees at a glance which shores are eating into
-villages and where the land is growing, before planning a visit or a meeting.
-
-### 2. Point card: "When could the river reach this house?"
-
-![Point card for a high-risk point on Manpura](docs/screenshots/02-point-card.png)
-
-Click any point: its score (0–100) and class with plain advice, the estimated **range of years until the river
-arrives**, the distance to today's bank, the bank's retreat rate (± its uncertainty), how often the spot flooded in
-2026, and "How is this calculated?" with the formula and its parts. Every card carries the disclaimer.
-**Real-life use:** a family deciding whether to rebuild on the same plot, or a local official checking a school or
-cyclone shelter site, gets a number and a time range they can bring to the union parishad — "Copy link" shares
-exactly this view.
-
-### 3. Draw an area: statistics and NISAR scenes
-
-![Statistics for a drawn area with the list of NISAR scenes](docs/screenshots/03-area-statistics.png)
-
-Draw any shape: area and land area, land lost per year, mean score, buildings (total, within 100 m and 500 m of the
-bank), **people by risk class** (WorldPop estimate), transects inside, and a live list of the NISAR scenes over the
-area with "Open in ASF" links. The shape can be downloaded as GeoJSON.
-**Real-life use:** a relief or resettlement planner outlines a ward or a char and gets how many homes and people
-sit near a retreating bank; a researcher finds which NISAR radar scenes cover their study area.
-
-### 4. Radar image and time slider
-
-![NISAR radar image on 17 August 2026 with the water mask and bank lines](docs/screenshots/04-radar-time-slider.png)
-
-The NISAR radar image (HH backscatter: water dark, land bright) for any 2026 pass, with that day's water. The
-slider steps through the passes (play, arrow keys); the July–August instrument gap is marked.
-**Real-life use:** watch the monsoon flood spread and drain pass by pass, through clouds that block ordinary
-satellite photos — useful for disaster-management staff after heavy rain or a cyclone.
-
-### 5. Flood frequency
-
-![Flood frequency over Manpura in the 2026 monsoon](docs/screenshots/05-flood-frequency.png)
-
-How often each place was under water across the 2026 NISAR passes (light = rarely, dark blue = almost always).
-**Real-life use:** shows which fields, roads and homesteads flood repeatedly in the monsoon — where raised plinths,
-embankment repair or drainage would help most.
-
-### 6. Transects: how fast each stretch of bank moves
-
-![Transects around Manpura coloured by bank retreat rate](docs/screenshots/06-transects.png)
-
-Lines every 100 m across the bank, coloured by the bank's speed since 1988 (red = retreating, blue = growing,
-± 60 m/yr). The retreat rates drive the "years until the river arrives".
-**Real-life use:** engineers and the Water Development Board can see which stretches erode fastest and compare them
-with where protection works exist.
-
-### 7. Compare 1988 with today
-
-![Swipe comparison of the 1988 Landsat bank and the 2026 NISAR bank](docs/screenshots/07-compare-1988-2026.png)
-
-Drag the handle (or use the arrow keys) to swipe between the 1988 dry-season shoreline (Landsat) and the latest
-NISAR shoreline.
-**Real-life use:** the clearest way to show a community meeting, a journalist or a donor how much land has gone in
-one generation.
-
-### 8. Union statistics
-
-![Statistics for Manpura union](docs/screenshots/08-union-statistics.png)
-
-Click a union name: land area, mean score, land lost per year, buildings and people by risk class.
-**Real-life use:** union and upazila officials compare their unions to set priorities for a budget or an
-adaptation plan.
-
-### 9. Bangla
-
-![The point card in Bangla](docs/screenshots/09-bangla.png)
-
-Every label, number and date switches to Bangla (বাংলা) with one button; the language stays in the link.
-**Real-life use:** people on the char and local officials read the results in their own language.
-
-### 10. Printable report
-
-![One-page printable report for a point](docs/screenshots/10-report.png)
-
-"Print report" opens an A4 page — map, the numbers, a three-line method summary, the disclaimer, data credits and a
-link back to the view — to print or save as PDF (Bangla prints correctly).
-**Real-life use:** take a paper copy to the union parishad, attach it to a relocation request, or hand it out at a
-community meeting where there is no internet.
-
-### 11. Method and live validation
-
-![Method page with validation numbers for Manpura](docs/screenshots/11-method-validation.png)
-
-How everything is calculated, in plain words (English and Bangla), with the site's live validation numbers
-(land area vs a published study, water map vs a Sentinel-2 image), the limitations and the data credits.
-**Real-life use:** lets a reviewer, journalist or official judge how far to trust the numbers before acting on them.
-
-### 12. About
-
-![About page with the team](docs/screenshots/12-about.png)
-
-What the project is, the team, the licence and repository link, and the data credits.
-
-### 13. Second site: Koyra, Khulna
-
-![Home Risk Score for Koyra](docs/screenshots/13-koyra.png)
-
-The same analysis for Koyra on the edge of the Sundarbans (NISAR track 170). New sites are added with one config
-file (see "Adding a new site").
-
-### 14. Demo site (no downloads)
-
-![The synthetic demo site with its red banner](docs/screenshots/14-demo-site.png)
-
-A synthetic river that makes the whole app work without any downloads or logins — for trying the app, teaching and
-tests. A red "DEMO DATA — not real measurements" banner is always shown.
-
-### 15–16. Phones
-
-<p>
-  <img src="docs/screenshots/15-phone-layers.png" alt="Phone layout with the layers sheet" width="280" />
-  &nbsp;
-  <img src="docs/screenshots/16-phone-point-card.png" alt="Point card on a phone" width="280" />
+<p align="center">
+  <img src="docs/media/hero.jpg" alt="The Last Safe Home: every home deserves a warning" width="100%">
 </p>
 
-On phones the side panel becomes a bottom sheet (Layers · Site summary) and the point card fills the screen.
-**Real-life use:** most people in coastal Bangladesh are online by mobile phone — the app works on a phone in the
-field, standing on the bank itself.
+<h1 align="center">The Last Safe Home</h1>
+
+<p align="center">
+  <b>Every home deserves a warning before it becomes a memory.</b><br>
+  River-bank erosion and flood risk for coastal Bangladesh, from NASA–ISRO <b>NISAR</b> radar.
+</p>
+
+<p align="center">
+  <img alt="NASA Space Apps Challenge 2026" src="https://img.shields.io/badge/NASA%20Space%20Apps-2026-0042A6?style=flat-square">
+  <img alt="Challenge: Dancing with the SARs" src="https://img.shields.io/badge/challenge-Dancing%20with%20the%20SARs-2E96F5?style=flat-square">
+  <img alt="Team Nova Logits" src="https://img.shields.io/badge/team-Nova%20Logits-07173F?style=flat-square">
+  <img alt="English and Bangla" src="https://img.shields.io/badge/language-English%20%C2%B7%20%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE-444?style=flat-square">
+  <img alt="MIT licence" src="https://img.shields.io/badge/licence-MIT-2fa35f?style=flat-square">
+</p>
+
+<p align="center">
+  <a href="#the-problem">Problem</a> ·
+  <a href="#what-it-does">What it does</a> ·
+  <a href="#the-film-in-six-frames">Film</a> ·
+  <a href="#how-it-works">How it works</a> ·
+  <a href="#data">Data</a> ·
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#limitations">Limitations</a> ·
+  <a href="#team">Team</a>
+</p>
+
+<!-- Add the YouTube links for the full film and the 30-second summary here, e.g. under the hero image. -->
 
 ---
 
-## Quick start (demo site, no credentials)
+## The problem
+
+In most countries an address is permanent. In the **chars of Bangladesh**, even an address can have an expiry date.
+Monpura Island covered about **148 km² in 1973** and around **114 km² by 2010**. The rivers are swallowing homes,
+farmland and livelihoods, and families face the same question again and again: *rebuild, or move?*
+
+For many of them that decision is still made on **instinct, not data**. Optical satellites are blind under monsoon
+cloud, engineering surveys rarely reach remote chars, and the data that does exist in space rarely reaches the
+people who need it.
+
+## What it does
+
+**The Last Safe Home** turns NISAR radar (which sees through cloud, day and night) and 38 years of Landsat images
+into three plain answers for any point on the map:
+
+| | Question | Answer |
+|---|---|---|
+| **1** | Where is the river bank today? | Distance from this home to today's bank line |
+| **2** | How fast is it moving? | Bank retreat rate since 1988, with its uncertainty |
+| **3** | What does that mean for someone's home? | A **Home Risk Score (0–100)** and the **range of years until the river arrives** |
+
+<p align="center">
+  <img src="docs/media/solution-2-three-answers.jpg" alt="The three answers: distance to the bank, retreat rate, Home Risk Score" width="86%">
+</p>
+
+> Every number is an estimate from satellite data, not an engineering survey. Use it to start a conversation with
+> local authorities.
+
+### Highlights
+
+- **Click a point** → score, years until the river arrives, distance to the bank, retreat rate, flood frequency
+- **Draw an area** → land lost, buildings and people by risk class, NISAR scenes over it, GeoJSON download
+- **Radar time slider** → step through the 2026 NISAR passes, through monsoon cloud
+- **1988 vs today** → swipe between the old Landsat shoreline and the latest NISAR shoreline
+- **One-page report** → print or save as PDF for the union parishad
+- **English and Bangla**, and a phone layout for use on the bank itself
+- **Two real sites**: Manpura Island (Bhola) and Koyra (Khulna), plus a synthetic demo site that needs no downloads
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/02-point-card.png" alt="Point card: score, years until the river arrives"><br><sub><b>Point card</b> · “When could the river reach this house?”</sub></td>
+    <td width="50%"><img src="docs/screenshots/03-area-statistics.png" alt="Draw an area: statistics and NISAR scenes"><br><sub><b>Draw an area</b> · land lost, buildings, people by risk class</sub></td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/07-compare-1988-2026.png" alt="Swipe between 1988 and 2026"><br><sub><b>1988 vs today</b> · decades of land loss in one swipe</sub></td>
+    <td><img src="docs/screenshots/04-radar-time-slider.png" alt="NISAR radar time slider"><br><sub><b>Radar time slider</b> · every 2026 NISAR pass</sub></td>
+  </tr>
+</table>
+
+All 16 screenshots, each with who uses it in real life: **[docs/FEATURES.md](docs/FEATURES.md)**.
+
+## The film in six frames
+
+The team's submission film and its 30-second summary tell the story from the char to the product.
+Frames from the film:
+
+<table>
+  <tr>
+    <td width="33%"><img src="docs/media/story-1-hook-char.jpg" alt="A home on a char with an expiry date"><br><sub><b>1 · The hook</b> · an address with an expiry date</sub></td>
+    <td width="33%"><img src="docs/media/story-2-land-lost.jpg" alt="Monpura lost 34 km² in 37 years"><br><sub><b>2 · The loss</b> · 148 → 114 km² in 37 years</sub></td>
+    <td width="33%"><img src="docs/media/story-4-clouds.jpg" alt="Optical satellites blind under monsoon cloud"><br><sub><b>3 · The gap</b> · optical satellites are blind under cloud</sub></td>
+  </tr>
+  <tr>
+    <td><img src="docs/media/solution-1-nisar-to-answers.jpg" alt="NISAR radar to three answers"><br><sub><b>4 · The solution</b> · NISAR radar → three answers</sub></td>
+    <td><img src="docs/media/impact-1-prepare-not-react.jpg" alt="Reacting after the loss versus preparing before"><br><sub><b>5 · The change</b> · from reacting to preparing</sub></td>
+    <td><img src="docs/media/impact-3-beyond-bangladesh.jpg" alt="Every river delta at risk"><br><sub><b>6 · Beyond Bangladesh</b> · every river delta at risk</sub></td>
+  </tr>
+</table>
+
+## How it works
+
+```mermaid
+flowchart LR
+    A["NISAR radar 2026<br/>NASA–ISRO · via ASF"] --> P
+    B["Landsat 1988–2026<br/>USGS"] --> P
+    C["OpenStreetMap · WorldPop<br/>geoBoundaries"] --> P
+    subgraph P["pipeline (Python)"]
+        direction LR
+        P1["water mask"] --> P2["bank lines"] --> P3["transects<br/>retreat rate"] --> P4["flood frequency"] --> P5["Home Risk Score"]
+    end
+    P --> D[("processed files")] --> API["API<br/>FastAPI"] --> W["web app<br/>React · MapLibre"]
+```
+
+1. **Where is the water?** NISAR HH backscatter is classified into water and land for each 2026 pass; Landsat gives the shoreline for each year since 1988.
+2. **Where is the bank, and how fast does it move?** A bank line per year, then transects every 100 m give the retreat rate and its uncertainty.
+3. **How often does it flood?** The share of 2026 passes in which a place was under water.
+4. **Home Risk Score.** For any land point, with *D* the distance to today's bank, *R ± σ* the retreat rate, *F* the flood frequency and *M* the ground movement:
+   - years until the river arrives **T = D ÷ R**, as a range using R ± σ (over 50 years is shown as “over 50 years”)
+   - **Score = 100 × (0.6·H<sub>E</sub> + 0.3·H<sub>F</sub> + 0.1·H<sub>G</sub>)**, where H<sub>E</sub> is the erosion hazard (1 if the river may arrive within 5 years, 0 at 50 years or more), H<sub>F</sub> the flood frequency and H<sub>G</sub> the ground movement. If radar cannot measure ground movement at a site, its weight goes to the other two.
+
+| Score | Class | Advice shown |
+|---|---|---|
+| 0–24 | Low | No sign of fast change here |
+| 25–49 | Moderate | Watch this area each monsoon |
+| 50–74 | High | Talk to your union parishad about plans |
+| 75–100 | Severe | The river may reach here within a few years |
+
+The same code computes the map colours and the numbers in the click card, so they always agree. The full method in
+plain words is in **[docs/METHOD.md](docs/METHOD.md)** (Bangla: [docs/METHOD.bn.md](docs/METHOD.bn.md)) and is also
+shown live in the app at `/method`, with the site's validation numbers.
+
+## Data
+
+<p align="center">
+  <img src="docs/media/open-data-sources.jpg" alt="Six public data sources" width="80%">
+</p>
+
+Only free and open data, no paid sources:
+
+| Source | Used for |
+|---|---|
+| **NISAR** (NASA–ISRO), via ASF DAAC | Water, today's bank line, flood frequency (provisional 2026 products) |
+| **Landsat** (USGS), via Planetary Computer | Bank lines every year since 1988 |
+| **Sentinel-2** (Copernicus), via Planetary Computer | Checking the water maps |
+| **OpenStreetMap** | Buildings, roads, facilities |
+| **WorldPop** | People per pixel, Bangladesh 100 m estimates |
+| **geoBoundaries** | Union boundaries |
+
+Plus insights from previous research on Monpura Island (*Dhaka Univ. J. Biol. Sci.*, 2013). Full credits and licences are at the
+[bottom of this page](#data-credits).
+
+## Tech stack
+
+| Layer | Built with |
+|---|---|
+| Processing pipeline | Python · numpy · xarray · rioxarray · rasterio · geopandas |
+| API | FastAPI |
+| Web app | React 18 · TypeScript · Vite · MapLibre GL · Terra Draw |
+| Delivery | Docker · docker-compose · Render (API) · Vercel / GitHub Pages (web) · optional fully static edition |
+| Tests | pytest · vitest · Playwright |
+
+## Quick start
+
+Try it on the synthetic demo site, with no accounts or downloads.
+
+```bash
+make setup     # conda env + npm install
+make demo      # build the synthetic demo site
+make api       # API on http://localhost:8000/api/v1/health
+make web       # app on http://localhost:5173/map?site=demo
+```
+
+<details>
+<summary><b>Quick start in detail: conda, Docker, or plain Python (Windows)</b></summary>
 
 With conda and make (Linux/macOS/WSL):
 
@@ -193,7 +210,12 @@ built app itself; first run `cd web && npx playwright install chromium`).
 Pages: `/` home page · `/map` the map · `/method` how it works + live validation · `/about` ·
 `/report?site=&lon=&lat=` (or `&polygon=`) printable report — use the browser's "Save as PDF".
 
-## Real data for a site
+</details>
+
+## Go further
+
+<details>
+<summary><b>Real data for a site (NASA Earthdata login, NISAR, Landsat)</b></summary>
 
 1. Copy `.env.example` to `.env` and fill in your **NASA Earthdata** login. Never commit `.env` or `data/`.
    ASF only serves NISAR once (a) the **Study Area** field of your Earthdata profile
@@ -211,7 +233,10 @@ Pages: `/` home page · `/map` the map · `/method` how it works + live validati
 5. Optional accuracy check: `python -m pipeline.cli validate --site manpura --make-points`, label the 200 points
    in `data/raw/manpura/validation/points.csv` (`water`/`land`) from Sentinel-2, run `validate` again.
 
-## Adding a new site
+</details>
+
+<details>
+<summary><b>Adding a new site</b></summary>
 
 1. Create `config/sites/<id>.yaml` by copying `manpura.yaml` and change: `id`, `name.en` / `name.bn`, `aoi_wkt`
    (a lon/lat polygon, keep it under ~0.35° × 0.35°), `utm_epsg` (UTM zone of the AOI: 32645 west of 90°E, 32646
@@ -225,7 +250,10 @@ Pages: `/` home page · `/map` the map · `/method` how it works + live validati
 5. Look at the sanity checks in `docs/DECISIONS.md` (phase 6): rates within ±200 m/yr, ≥ 80 % of transects with a
    rate, score not all one class, water mask vs Sentinel-2 (`validation.json`).
 
-## Deploying
+</details>
+
+<details>
+<summary><b>Deploying: API, web, and the static edition</b></summary>
 
 The API serves files from `data/processed/`, which is not in git. `make pack` (or
 `python -m pipeline.lsh.pack --sites manpura,koyra,demo --tar data/deploy/lsh-data.tar.gz`) writes a deploy
@@ -254,6 +282,9 @@ fallback). Clicks are answered for the ~100 m grid cell (the card says so); the 
 statistics and the NISAR scene search need the live API and say so. Useful as a fallback when the API host is
 down or asleep.
 
+</details>
+
+
 ## Repository layout
 
 `config/sites/` site files · `pipeline/` offline Python processing (`python -m pipeline.cli <step> --site <id>`)
@@ -261,19 +292,11 @@ down or asleep.
 `docs/METHOD.md` (+ `METHOD.bn.md`) the method in plain words, shown on `/method` · `docs/DECISIONS.md` every
 deviation from [SPEC.md](SPEC.md) · `docker-compose.yml`, `render.yaml`, `vercel.json` deployment.
 
-## Data credits
-
-- NISAR data courtesy of NASA/JPL-Caltech and ISRO, via ASF DAAC (provisional `PR` products, 2026).
-- Landsat data courtesy of the U.S. Geological Survey (Collection 2 Level 2), accessed through Microsoft
-  Planetary Computer.
-- Sentinel-2 (validation only): contains modified Copernicus Sentinel data 2026, via Microsoft Planetary Computer.
-- Buildings, roads and facilities © OpenStreetMap contributors (ODbL), via the Overpass API. Basemap © OpenStreetMap
-  contributors; satellite basemap © Esri, Maxar, Earthstar Geographics.
-- Population: WorldPop (www.worldpop.org), Bangladesh 100 m constrained estimates 2025 (R2025A), CC BY 4.0.
-- Union boundaries: geoBoundaries (Runfola et al. 2020), source Bangladesh Bureau of Statistics / OCHA ROAP,
-  CC BY 3.0 IGO.
-
-This project is not endorsed by NASA or ISRO and does not use their logos.
+```
+config/sites/   site files                 pipeline/   offline Python processing
+api/            FastAPI backend            web/        React + MapLibre app
+docs/           method, decisions, media   docs/campaign/   film and submission materials
+```
 
 ## Limitations
 
@@ -287,11 +310,51 @@ This project is not endorsed by NASA or ISRO and does not use their logos.
 - Ground movement (InSAR) is unusable over wet, vegetated deltas (Manpura: 0.2 % coherent land) and is then left
   out of the score.
 - People and building counts come from WorldPop and OpenStreetMap, which miss homes.
-- The water maps are not yet checked against hand-labelled points (`validation.json` says so; see step 5 above).
+- The water maps are not yet checked against hand-labelled points (`validation.json` says so; see step 5 of “Real data for a site”).
 - Bangla text still needs a native speaker's review.
 
 Details and numbers: `/method` in the app and `docs/DECISIONS.md`.
 
+## Team
+
+Team **Nova Logits**, NASA Space Apps Challenge 2026, Khulna local event.
+
+<table>
+  <tr>
+    <td align="center" width="25%"><img src="docs/campaign/video-v3/public/team/pritom.jpg" width="150" alt="Pritom Banik"><br><b>Pritom Banik</b><br>Team Leader<br><sub>Project Management</sub></td>
+    <td align="center" width="25%"><img src="docs/campaign/video-v3/public/team/arka.jpg" width="150" alt="Arka Braja Prasad Nath"><br><b>Arka Braja Prasad Nath</b><br>Lead Developer<br><sub>Technical Architect</sub></td>
+    <td align="center" width="25%"><img src="docs/campaign/video-v3/public/team/megha.jpg" width="150" alt="Megha Tania"><br><b>Megha Tania</b><br>UI/UX Designer<br><sub>Presenter</sub></td>
+    <td align="center" width="25%"><img src="docs/campaign/video-v3/public/team/enam.jpg" width="150" alt="Md Enam E Elahi"><br><b>Md Enam E Elahi</b><br>Researcher<br><sub>Data Analyst</sub></td>
+  </tr>
+</table>
+
+<p align="center">
+  <img src="docs/media/team-slide.jpg" alt="Team Nova Logits" width="80%">
+</p>
+
+## Project documents
+
+| | |
+|---|---|
+| [docs/FEATURES.md](docs/FEATURES.md) | All 16 screenshots, with real-life uses |
+| [docs/METHOD.md](docs/METHOD.md) · [বাংলা](docs/METHOD.bn.md) | How every number is calculated |
+| [docs/DECISIONS.md](docs/DECISIONS.md) | Every deviation from [SPEC.md](SPEC.md), and why |
+| [docs/campaign/](docs/campaign/README.md) | The submission film, 30-second summary, thumbnail and how they are built |
+
+## Data credits
+
+- NISAR data courtesy of NASA/JPL-Caltech and ISRO, via ASF DAAC (provisional `PR` products, 2026).
+- Landsat data courtesy of the U.S. Geological Survey (Collection 2 Level 2), accessed through Microsoft
+  Planetary Computer.
+- Sentinel-2 (validation only): contains modified Copernicus Sentinel data 2026, via Microsoft Planetary Computer.
+- Buildings, roads and facilities © OpenStreetMap contributors (ODbL), via the Overpass API. Basemap © OpenStreetMap
+  contributors; satellite basemap © Esri, Maxar, Earthstar Geographics.
+- Population: WorldPop (www.worldpop.org), Bangladesh 100 m constrained estimates 2025 (R2025A), CC BY 4.0.
+- Union boundaries: geoBoundaries (Runfola et al. 2020), source Bangladesh Bureau of Statistics / OCHA ROAP,
+  CC BY 3.0 IGO.
+
+This project is not endorsed by NASA or ISRO. The NASA Space Apps Challenge logo appears in the film and the thumbnail only to name the event the project was built for; no NASA or ISRO insignia is used in the app.
+
 ## Licence
 
-[MIT](LICENSE)
+[MIT](LICENSE) · Built for NASA Space Apps Challenge 2026.
