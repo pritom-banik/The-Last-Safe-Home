@@ -13,9 +13,12 @@ test.skip(!process.env.E2E_MANPURA, "set E2E_MANPURA=1 to run against real Manpu
 test.setTimeout(120_000);
 
 const PT = [91.0195, 22.378]; // a high-score point on the north-east shore
-const stats = JSON.parse(
-  readFileSync(fileURLToPath(new URL("../../data/processed/manpura/stats.json", import.meta.url)), "utf8"),
-);
+// read only when the spec is enabled: data/ is not committed, so the file is absent in CI
+const stats = process.env.E2E_MANPURA
+  ? JSON.parse(
+      readFileSync(fileURLToPath(new URL("../../data/processed/manpura/stats.json", import.meta.url)), "utf8"),
+    )
+  : {};
 
 test("manpura: summary, point, compare, scenes, report, method", async ({ page, context }) => {
   await page.goto(`/?site=manpura&lat=${PT[1]}&lon=${PT[0]}&z=13&pt=${PT[0]},${PT[1]}&lang=en`);
