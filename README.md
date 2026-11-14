@@ -26,6 +26,7 @@
   <a href="#data">Data</a> ·
   <a href="#quick-start">Quick start</a> ·
   <a href="#limitations">Limitations</a> ·
+  <a href="#use-of-ai">Use of AI</a> ·
   <a href="#team">Team</a>
 </p>
 
@@ -355,6 +356,18 @@ docs/           method, features, media    docs/media/ story frames, screenshots
 - Bangla text still needs a native speaker's review.
 
 Details and numbers: `/method` in the app and [docs/METHOD.md](docs/METHOD.md).
+
+## Use of AI
+
+In line with the NASA Space Apps Challenge rules, we declare that we used generative AI tools while building this
+project:
+
+| Tool | How we used it |
+|---|---|
+| **Claude** (Anthropic) |  Explaining radar and GIS concepts, creating video animation, Documentation |
+| **Claude Code** (Anthropic) | Writing, debugging and testing code (pipeline, API, web app), CI and deployment setup, documentation |
+| **ChatGPT** (OpenAI) | Research help, drafting and editing text |
+
 
 ## Team
 
